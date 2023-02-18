@@ -1,0 +1,75 @@
+<DOCTYPE! html>
+	<html>
+	<head>
+	    <title>Form Activity</title>    
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Oswald'>
+		<link rel="stylesheet" href="style1.css" type="text/css">
+        <script language="javascript" type ="text/javascript">
+        const validatePassword = () => {
+        document.getElementById("successAlert").innerHTML = "";
+        document.getElementById("invalidPass").innerHTML = "";
+        document.getElementById("invalidAge").innerHTML = "";
+
+        let error = false;
+
+        const minPassLength = 8;
+        if (document.getElementById("password").value.length < minPassLength) {
+            document.getElementById("invalidPass").innerHTML = `Password must be at least ${minPassLength} characters.`;
+            error = true;
+        }
+
+        const minAge = 21;
+        const bday = new Date(document.getElementById("birthdate").value);
+        if (bday == "Invalid Date") {
+            document.getElementById("invalidAge").innerHTML = bday;
+        } else if (Math.abs(bday.getFullYear() - (new Date).getFullYear()) < minAge) {
+            document.getElementById("invalidAge").innerHTML = "Minors are not allowed!";
+            error = true;
+        }
+
+        if (!error) {
+            document.getElementById("successAlert").innerHTML = "Hooray! Your account has been successfully created.";
+    }
+}
+    </script>
+    </head>
+    <body>
+        <div>
+          <h1>Registration Form</h1>
+
+          <p id="successAlert" class="successAlert"></p>
+          <form>
+            First Name: <br />
+            <input type="text" class="inputBox" /> <br />
+            Last Name: <br />
+            <input type="text" class="inputBox" /> <br />
+            Nickname: <br />
+            <input type="text" class="inputBox" /> <br />
+            Email: <br />
+            <input type="email" class="inputBox" /> <br />
+            Password: <br />
+            <input type="password" class="inputBox" id="password" /> <br />
+
+            <p id="invalidPass" class="errorAlert"></p>
+            Date of Birth: <br />
+            <input type="date" class="inputBox" id="birthdate" /> <br />
+
+            <p id="invalidAge" class="errorAlert"></p>
+            Gender: <br />
+            <input type="radio" name="gender" value="male" /> Male
+            <input type="radio" name="gender" value="female" /> Female
+            <input type="radio" name="gender" value="other" /> Other
+            <br />
+            Mobile: <br />
+            <input type="tel" class="inputBox" /> <br />
+            Address: <br />
+            <textarea class="inputBox" value="Address: " cols="30" rows="10"></textarea> <br />
+            <input type="button" value="Submit" onclick="validatePassword()" />
+            <input type="reset" value="Reset" />
+          </form>
+        </div>
+      </body>
+      </html>
